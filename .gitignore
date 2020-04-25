@@ -1,0 +1,9 @@
+*.class
+*.log
+*.idea
+*.sqlite
+*.gensim
+*.gensim.*
+test01/
+hw-1/
+HW1/cifar-10/
