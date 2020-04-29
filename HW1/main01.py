@@ -60,7 +60,7 @@ def get_dist(img1, img2):
 
 
 def nearest_match(im_number):
-    query = vector_tree.query(get_hist(im_number))
+    query = ave_vector_tree.query(get_hist(im_number))
     print('Image ' + str(im_number) + '.png predicted label: ' + labels[query[1]])
     for v in vector_list:
         if v[1] == get_hist(im_number):
@@ -103,6 +103,7 @@ vector_list = []
 for img in img_list:
     hist = get_hist(img[1])
     vector_list.append([img[1], labels[img[0]], hist])
+vector_tree = spatial.KDTree([i[2] for i in vector_list])
 
 vector_averages = []
 for i in range(10):
@@ -111,5 +112,4 @@ for i in range(10):
         if label == labels[i]:
             temp.append(vector)
     vector_averages.append([i, np.mean(temp, axis=0)])
-
-vector_tree = spatial.KDTree([i[2] for i in vector_list])
+ave_vector_tree = spatial.KDTree([i[1] for i in vector_averages])
